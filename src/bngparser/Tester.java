@@ -44,12 +44,12 @@ public class Tester {
 	public static void main(String[] args) throws IOException,RecognitionException{
 		
 		//String inputFile2 = "/home/proto/workspace/bionetgen/parser/SBMLparser/egfr/output19.bngl";
-		String inputFile2 = "testModels/CaOscillate_Func.bngl";
+		String inputFile2 = ".." + System.getProperty("file.separator")  + "testModels/CaOscillate_Func.bngl";
 		
 		List<String> inputFileList = new ArrayList<String>();
 //		inputFileList.add("testModels/Parente.bngl");
 //		inputFileList = getFileNames("bngparser/models");
-		inputFileList = getFileNames("testModels");
+		inputFileList = getFileNames(".." + System.getProperty("file.separator")  + "testModels");
 		String outputFile = "output.xml";
 		
 		if(args.length > 0){
