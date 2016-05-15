@@ -214,18 +214,25 @@ bifurcate[Map<String,String> map]
 
 write_file
 : 
-  WRITEFILE LPAREN LBRACKET
+  WRITEFILE 
+  LPAREN 
+  (LBRACKET
   (write_file_args (COMMA write_file_args)*)?
-  RBRACKET RPAREN SEMI?
+  RBRACKET)? 
+  RPAREN SEMI?
 ;
 
 write_file_args
 :
-    (FORMAT ASSIGNS DBQUOTES STRING DBQUOTES) | (PREFIX ASSIGNS DBQUOTES STRING DBQUOTES) |
-    (SUFFIX ASSIGNS DBQUOTES STRING DBQUOTES) | (INCLUDE_MODEL ASSIGNS INT) | (INCLUDE_NETWORK ASSIGNS INT) |
-    (OVERWRITE ASSIGNS INT) | (TEXTREACTION ASSIGNS INT) | (TEXTSPECIES ASSIGNS INT) | 
-    (PRETTY_FORMATTING ASSIGNS INT) | (EVALUATE_EXPRESSIONS ASSIGNS INT)    
-    
+    ps_par_def |
+    FORMAT ASSIGNS DBQUOTES STRING DBQUOTES | 
+    INCLUDE_MODEL ASSIGNS INT | 
+    INCLUDE_NETWORK ASSIGNS INT |
+    OVERWRITE ASSIGNS INT | 
+    TEXTREACTION ASSIGNS INT | 
+    TEXTSPECIES ASSIGNS INT | 
+    PRETTY_FORMATTING ASSIGNS INT | 
+    EVALUATE_EXPRESSIONS ASSIGNS INT
 ;
 
 filename
@@ -233,8 +240,6 @@ filename
 //  (STRING|DOT|DIV|MINUS|FLOAT)+
   (~DBQUOTES)+
 ;
-
-
 
 write_model
 scope{
@@ -247,19 +252,19 @@ scope{
   WRITEMODEL
   LPAREN 
   (LBRACKET 
-  (write_model_args (COMMA write_model_args)*)? 
+  (write_file_args (COMMA write_file_args)*)? 
   RBRACKET)?
   RPAREN SEMI? 
   -> action(id={$WRITEMODEL.text})
 ;
 
-write_model_args
-: 
-  ps_par_def |
-  OVERWRITE ASSIGNS INT |
-  PRETTY_FORMATTING ASSIGNS INT |
-  EVALUATE_EXPRESSIONS ASSIGNS INT
-;
+//write_model_args
+//: 
+//  ps_par_def |
+//  OVERWRITE ASSIGNS INT |
+//  PRETTY_FORMATTING ASSIGNS INT |
+//  EVALUATE_EXPRESSIONS ASSIGNS INT
+//;
 
 write_xml
 scope{
@@ -272,17 +277,18 @@ scope{
   WRITEXML
   LPAREN 
   (LBRACKET 
-  (write_xml_args (COMMA write_xml_args)*)? 
+  (write_file_args (COMMA write_file_args)*)? 
+//  EVALUATE_EXPRESSIONS ASSIGNS INT
   RBRACKET)?
   RPAREN SEMI? 
   -> action(id={$WRITEXML.text})
 ;
 
-write_xml_args
-: 
-  ps_par_def |
-  OVERWRITE ASSIGNS INT
-;
+//write_xml_args
+//: 
+//  ps_par_def |
+//  OVERWRITE ASSIGNS INT
+//;
 
 write_network
 scope{
@@ -295,22 +301,22 @@ scope{
   WRITENETWORK
   LPAREN 
   (LBRACKET 
-  (write_network_args (COMMA write_network_args)*)? 
+  (write_file_args (COMMA write_file_args)*)? 
   RBRACKET)?
   RPAREN SEMI? 
   -> action(id={$WRITENETWORK.text})
 ;
 
-write_network_args
-: 
-  ps_par_def |
-  OVERWRITE ASSIGNS INT |
-  INCLUDE_MODEL ASSIGNS INT |
-  PRETTY_FORMATTING ASSIGNS INT |
-  EVALUATE_EXPRESSIONS ASSIGNS INT |
-  TEXTREACTION ASSIGNS INT |
-  TEXTSPECIES ASSIGNS INT
-;
+//write_network_args
+//: 
+//  ps_par_def |
+//  OVERWRITE ASSIGNS INT |
+//  INCLUDE_MODEL ASSIGNS INT |
+//  PRETTY_FORMATTING ASSIGNS INT |
+//  EVALUATE_EXPRESSIONS ASSIGNS INT |
+//  TEXTREACTION ASSIGNS INT |
+//  TEXTSPECIES ASSIGNS INT
+//;
 
 write_sbml
 scope{
