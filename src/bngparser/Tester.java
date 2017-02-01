@@ -49,6 +49,7 @@ public class Tester {
 		List<String> inputFileList = new ArrayList<String>();
 //		inputFileList.add("testModels/Parente.bngl");
 //		inputFileList = getFileNames("bngparser/models");
+		String outputFile = "output.xml";
 		
 		if(args.length > 0){
 		   inputFile2 = args[0];
@@ -57,7 +58,6 @@ public class Tester {
 		}
 		else{
 		   inputFileList = getFileNames("testModels");
-		   String outputFile = "output.xml";
 		}
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("D_3D", "1e-8");
