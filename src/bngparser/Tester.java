@@ -49,16 +49,15 @@ public class Tester {
 		List<String> inputFileList = new ArrayList<String>();
 //		inputFileList.add("testModels/Parente.bngl");
 //		inputFileList = getFileNames("bngparser/models");
-		inputFileList = getFileNames("testModels");
-		String outputFile = "output.xml";
 		
 		if(args.length > 0){
-			inputFile2 = args[0];
-			outputFile = args[1];
+		   inputFile2 = args[0];
+		   outputFile = args[1];
+		   inputFileList.add(inputFile2);
 		}
 		else{
-			//System.err.println("format: java -jar bngparser.jar <inputFile> <outputFile>");
-			//return;
+		   inputFileList = getFileNames("testModels");
+		   String outputFile = "output.xml";
 		}
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("D_3D", "1e-8");
